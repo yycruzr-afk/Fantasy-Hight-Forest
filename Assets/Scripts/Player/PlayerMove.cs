@@ -9,6 +9,9 @@ public class PlayerMove : MonoBehaviour
     [SerializeField]
     private float velocidadX = 1f;
 
+    [SerializeField]
+    private float velocidadSalto = 3f;
+
 
     // Update is called once per frame
     void FixedUpdate()
@@ -22,5 +25,13 @@ public class PlayerMove : MonoBehaviour
             rb2d.linearVelocityX = -velocidadX;
         }
         else rb2d.linearVelocityX = 0f;
+
+
+        if (Input.GetKey(KeyCode.Space) && GetComponentInChildren<CheckGround>().GetEnSuelo())
+        {
+            rb2d.linearVelocityY = velocidadSalto;
+        }
+
+
     }
 }
