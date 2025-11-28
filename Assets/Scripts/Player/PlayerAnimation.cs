@@ -48,5 +48,10 @@ public class PlayerAnimation : MonoBehaviour
         {
             animator.SetBool("enSuelo", false);
         }
+
+        if(Input.GetKeyDown (KeyCode.X) && enSuelo)
+        {
+            animator.SetTrigger("ataque");
+        }
     }
 }
