@@ -7,21 +7,46 @@ public class PlayerAnimation : MonoBehaviour
     [SerializeField]
     private Animator animator;
 
+    private CheckGround checkGround;
+
+    private void Start()
+    {
+        checkGround = GetComponentInChildren<CheckGround>();
+    }
+
     void Update()
     {
+        bool corriendo = false;
+
         if (Input.GetKey(KeyCode.RightArrow))
         {
             spriteRenderer.flipX = false;
-            animator.SetBool("isRun", true);
+            corriendo = true;
         }
         else if (Input.GetKey(KeyCode.LeftArrow))
         {
             spriteRenderer.flipX = true;
-            animator.SetBool("isRun", true);
+            corriendo = true;
+        }
+
+        animator.SetBool("isRun", corriendo);
+
+
+        bool enSuelo = checkGround.GetEnSuelo();
+
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            animator.SetTrigger("salto");
+        }
+
+        if (enSuelo)
+        {
+            animator.SetBool("enSuelo", true);
         }
         else
         {
-            animator.SetBool("isRun", false);
+            animator.SetBool("enSuelo", false);
         }
     }
 }
