@@ -7,6 +7,12 @@ public class PlayerAnimation : MonoBehaviour
     [SerializeField]
     private Animator animator;
 
+    [SerializeField]
+    private GameObject colision;
+
+    [SerializeField]
+    private PlayerMove playerMove;
+
     private CheckGround checkGround;
 
     private void Start()
@@ -48,10 +54,10 @@ public class PlayerAnimation : MonoBehaviour
         {
             animator.SetBool("enSuelo", false);
         }
+    }
 
-        if(Input.GetKeyDown (KeyCode.X) && enSuelo)
-        {
-            animator.SetTrigger("ataque");
-        }
+    public void atacar()
+    {
+        animator.SetTrigger("ataque");
     }
 }

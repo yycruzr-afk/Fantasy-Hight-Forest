@@ -2,6 +2,13 @@ using UnityEngine;
 
 public class SnailMove : BaseEnemies
 {
+    //EXTRAS PARA DANIO
+    private bool danioRecibe = false;
+    [SerializeField]
+    private float fuerzaRebote = 0f;
+    [SerializeField]
+    private float tiempoInvencibilidad = 0f;
+
     protected override void Start()
     {
         base.Start();
@@ -9,6 +16,8 @@ public class SnailMove : BaseEnemies
     }
     private void FixedUpdate()
     {
+        if (danioRecibe) return;
+
         float distancia = Vector2.Distance(transform.position, player.transform.position);
 
         if(distancia <= radioDeteccion)
@@ -41,5 +50,31 @@ public class SnailMove : BaseEnemies
         {
             player.GetComponent<PlayerMove>().RecibeDanio(transform.position, 1);
         }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Espada"))
+        {
+            RecibeDanio(player.transform.position, 1);
+        }
+    }
+
+    private void RecibeDanio(Vector2 direccion, int cantidadDanio)
+    {
+        if (!danioRecibe)
+        {
+            danioRecibe = true;
+            Vector2 rebote = new Vector2(transform.position.x - direccion.x, .01f);
+            rb2d.AddForce(rebote.normalized * fuerzaRebote, ForceMode2D.Impulse);
+        }
+
+        //Invoke("desactivaDanio", tiempoInvencibilidad);
+        animator.SetTrigger("Danio");
+    }
+
+    public void desactivaDanio()
+    {
+        danioRecibe = false;
     }
 }

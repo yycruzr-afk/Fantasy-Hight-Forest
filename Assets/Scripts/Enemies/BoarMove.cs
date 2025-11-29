@@ -32,8 +32,6 @@ public class BoarMove : BaseEnemies
             DeterminarObjetivoInical();
         }
 
-
-
         if(estadoActual == EstadoEnemigo.persecucion)
         {
             animator.SetBool("Correr", true);

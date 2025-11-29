@@ -12,14 +12,17 @@ public class PlayerMove : MonoBehaviour
     [SerializeField]
     private float velocidadSalto = 3f;
 
+
+
     private bool danioRecibe = false;
+    private bool atacando = false;
     public float fuerzaRebotea = 1f;
     public float tiempoInvensibilidad = 1f;
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (danioRecibe) return;
+        if (danioRecibe || atacando) return;
 
         if (Input.GetKey(KeyCode.RightArrow))
         {
@@ -38,8 +41,25 @@ public class PlayerMove : MonoBehaviour
         }
 
 
+        if (Input.GetKey(KeyCode.X) && atacando == false)
+        {
+            atacar();
+        }
     }
 
+    public void atacar()
+    {
+        if(atacando == false)
+        {
+            atacando = true;
+            GetComponent<PlayerAnimation>().atacar();
+        }
+    }
+
+    public void desactivarAtaque()
+    {
+        atacando = false;
+    }
     public void RecibeDanio(Vector2 direccion, int cantidadDanio)
     {
         if (!danioRecibe)
