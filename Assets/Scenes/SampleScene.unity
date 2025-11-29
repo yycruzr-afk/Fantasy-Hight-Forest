@@ -276,7 +276,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!61 &109253991
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -466,11 +466,12 @@ MonoBehaviour:
   radioDeteccion: 1
   distanciaPatrullaje: 1
   CantidadDanioHaciaPlayer: 2
+  vidaEnemigo: 2
+  fuerzaRebote: 3
+  tiempoInvencibilidad: 0.5
   radioVision: 1.5
   velocidadCorrer: 1
   velocidadCaminar: 0.5
-  fuerzaRebote: 3
-  tiempoInvencibilidad: 0.5
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -787,7 +788,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!95 &1132719143
 Animator:
   serializedVersion: 7
@@ -977,6 +978,7 @@ MonoBehaviour:
   radioDeteccion: 1
   distanciaPatrullaje: 1
   CantidadDanioHaciaPlayer: 1
+  vidaEnemigo: 2
   fuerzaRebote: 3
   tiempoInvencibilidad: 0.5
 --- !u!1 &1159863526
@@ -1035,6 +1037,7 @@ MonoBehaviour:
   vida: 5
   fuerzaRebotea: 2.5
   tiempoInvensibilidad: 0.5
+  danioEspada: 1
 --- !u!50 &1159863529
 Rigidbody2D:
   serializedVersion: 5

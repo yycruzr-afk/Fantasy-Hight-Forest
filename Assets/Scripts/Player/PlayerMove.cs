@@ -3,25 +3,31 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
+    //MOVIMIENTO
     [SerializeField]
     public Rigidbody2D rb2d;
-
     [SerializeField]
     private float velocidadX = 1f;
-
     [SerializeField]
     private float velocidadSalto = 3f;
-
     [SerializeField]
     private int vida = 5;
+    
+    //RECIBIR DAÑO
+    [SerializeField]
+    public float fuerzaRebotea = 1f;
+    [SerializeField]
+    public float tiempoInvensibilidad = 1f;
 
+    //EXTRAS PARA SISTEMA DE VIDA
     private bool danioRecibe = false;
     private bool atacando = false;
     private bool estaVivo = true;
-    public float fuerzaRebotea = 1f;
-    public float tiempoInvensibilidad = 1f;
 
-    // Update is called once per frame
+    //HACER DANIO
+    [SerializeField]
+    private int danioEspada = 1;
+
     void FixedUpdate()
     {
         if (danioRecibe || atacando || !estaVivo) return;
@@ -93,5 +99,10 @@ public class PlayerMove : MonoBehaviour
     public bool RetornarEstadoVida()
     {
         return estaVivo;
+    }
+
+    public int RetornarDanioEspada()
+    {
+        return danioEspada;
     }
 }

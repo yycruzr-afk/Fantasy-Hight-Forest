@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -31,6 +32,18 @@ public class BaseEnemies : MonoBehaviour
     protected float distanciaPatrullaje = 1f;
     [SerializeField]
     protected int CantidadDanioHaciaPlayer = 1;
+    [SerializeField]
+
+
+    //EXTRAS PARA DANIO
+    protected int vidaEnemigo = 2;
+    protected bool estaVivo = true;
+    protected bool danioRecibe = false;
+    [SerializeField]
+    protected float fuerzaRebote = 1f;
+    [SerializeField]
+    protected float tiempoInvencibilidad = 0.5f;
+
 
     //Extras para movimiento
     protected Vector2 objetivoPatrulla;
@@ -103,5 +116,10 @@ public class BaseEnemies : MonoBehaviour
                 Gizmos.DrawSphere(limiteDerecho, 0.15f);
             }
         }
+    }
+
+    protected virtual void destriurObjeto()
+    {
+        Destroy(gameObject);
     }
 }

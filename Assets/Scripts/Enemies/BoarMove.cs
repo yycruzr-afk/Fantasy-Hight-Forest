@@ -11,12 +11,12 @@ public class BoarMove : BaseEnemies
     private float velocidadCaminar = 0.5f;
 
 
-    //EXTRAS PARA DANIO
-    private bool danioRecibe = false;
-    [SerializeField]
-    private float fuerzaRebote = 1f;
-    [SerializeField]
-    private float tiempoInvencibilidad = 0.5f;
+    ////EXTRAS PARA DANIO
+    //private bool danioRecibe = false;
+    //[SerializeField]
+    //private float fuerzaRebote = 1f;
+    //[SerializeField]
+    //private float tiempoInvencibilidad = 0.5f;
 
     protected override void Start()
     {
@@ -25,7 +25,7 @@ public class BoarMove : BaseEnemies
 
     private void FixedUpdate()
     {
-        if (danioRecibe || !player.GetComponent<PlayerMove>().RetornarEstadoVida()) return;
+        if (danioRecibe || !player.GetComponent<PlayerMove>().RetornarEstadoVida() || !estaVivo) return;
 
         float distancia = Vector2.Distance(transform.position, player.transform.position);
         if(distancia <= radioDeteccion)
@@ -66,6 +66,13 @@ public class BoarMove : BaseEnemies
             Patrullar();
         }
 
+        if (vidaEnemigo <= 0 && estaVivo)
+        {
+            estaVivo = false;
+            animator.SetTrigger("Muerte");
+        }
+
+
         if (direccion < 0) spriteRenderer.flipX = false;
         else if (direccion > 0) spriteRenderer.flipX = true;
     }
@@ -77,6 +84,7 @@ public class BoarMove : BaseEnemies
         direccion = Mathf.Sign(enemigoAPlayer.x);
     }
 
+    //DANIO HACIA JUGADOR
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
@@ -85,20 +93,22 @@ public class BoarMove : BaseEnemies
         }
     }
 
+
+    //DANIO A ENEMIGO
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Espada"))
         {
-            RecibeDanio(player.transform.position, 1);
+            RecibeDanio(player.transform.position, player.GetComponent<PlayerMove>().RetornarDanioEspada());
         }
     }
-
     private void RecibeDanio(Vector2 direccion, int cantidadDanio)
     {
         if (!danioRecibe)
         {
             danioRecibe = true;
             Vector2 rebote = new Vector2(transform.position.x - direccion.x, .01f);
+            vidaEnemigo -= cantidadDanio;
             rb2d.AddForce(rebote.normalized * fuerzaRebote, ForceMode2D.Impulse);
         }
 

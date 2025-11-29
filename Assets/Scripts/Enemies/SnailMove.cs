@@ -2,12 +2,12 @@ using UnityEngine;
 
 public class SnailMove : BaseEnemies
 {
-    //EXTRAS PARA DANIO
-    private bool danioRecibe = false;
-    [SerializeField]
-    private float fuerzaRebote = 0f;
-    [SerializeField]
-    private float tiempoInvencibilidad = 0f;
+    ////EXTRAS PARA DANIO
+    //private bool danioRecibe = false;
+    //[SerializeField]
+    //private float fuerzaRebote = 0f;
+    //[SerializeField]
+    //private float tiempoInvencibilidad = 0f;
 
     protected override void Start()
     {
@@ -16,7 +16,7 @@ public class SnailMove : BaseEnemies
     }
     private void FixedUpdate()
     {
-        if (danioRecibe || !player.GetComponent<PlayerMove>().RetornarEstadoVida()) return;
+        if (danioRecibe || !player.GetComponent<PlayerMove>().RetornarEstadoVida() || !estaVivo) return;
 
         float distancia = Vector2.Distance(transform.position, player.transform.position);
 
@@ -40,10 +40,18 @@ public class SnailMove : BaseEnemies
             Patrullar();
         }
 
-        if(direccion < 0) spriteRenderer.flipX = false;
+        if (vidaEnemigo <= 0 && estaVivo)
+        {
+            estaVivo = false;
+            animator.SetTrigger("Muerte");
+        }
+
+        if (direccion < 0) spriteRenderer.flipX = false;
         else if(direccion > 0) spriteRenderer.flipX = true;
     }
 
+
+    //DANIO A PLAYER
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
@@ -52,20 +60,21 @@ public class SnailMove : BaseEnemies
         }
     }
 
+    //DANIO A ENEMIGO
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Espada"))
         {
-           RecibeDanio(player.transform.position, 1);
+           RecibeDanio(player.transform.position, player.GetComponent<PlayerMove>().RetornarDanioEspada());
         }
     }
-
     private void RecibeDanio(Vector2 direccion, int cantidadDanio)
     {
         if (!danioRecibe)
         {
             danioRecibe = true;
             Vector2 rebote = new Vector2(transform.position.x - direccion.x, .01f);
+            vidaEnemigo -= cantidadDanio;
             rb2d.AddForce(rebote.normalized * fuerzaRebote, ForceMode2D.Impulse);
         }
 
