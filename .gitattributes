@@ -1,0 +1,5 @@
+# Unity: Configura los archivos de configuracion para usar el motor de fusion inteligente (UnityYAMLMerge)
+*.unity merge=unityyamlmerge
+*.prefab merge=unityyamlmerge
+*.controller merge=unityyamlmerge
+*.anim merge=unityyamlmerge
