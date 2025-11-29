@@ -20,7 +20,7 @@ public class PlayerAnimation : MonoBehaviour
         checkGround = GetComponentInChildren<CheckGround>();
     }
 
-    void Update()
+    public void ActualizarAnimaciones()
     {
         bool corriendo = false;
 
@@ -59,5 +59,10 @@ public class PlayerAnimation : MonoBehaviour
     public void atacar()
     {
         animator.SetTrigger("ataque");
+    }
+
+    public void DispararAnimacionMuerte()
+    {
+        animator.SetTrigger("Muerte");
     }
 }

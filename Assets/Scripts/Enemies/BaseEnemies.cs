@@ -29,6 +29,8 @@ public class BaseEnemies : MonoBehaviour
     protected float radioDeteccion = 3f;
     [SerializeField]
     protected float distanciaPatrullaje = 1f;
+    [SerializeField]
+    protected int CantidadDanioHaciaPlayer = 1;
 
     //Extras para movimiento
     protected Vector2 objetivoPatrulla;

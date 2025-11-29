@@ -465,9 +465,12 @@ MonoBehaviour:
   velocidad: 0.5
   radioDeteccion: 1
   distanciaPatrullaje: 1
+  CantidadDanioHaciaPlayer: 2
   radioVision: 1.5
   velocidadCorrer: 1
   velocidadCaminar: 0.5
+  fuerzaRebote: 3
+  tiempoInvencibilidad: 0.5
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -918,7 +921,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.22, y: 0.19}
+    oldSize: {x: 0.29, y: 0.23}
     newSize: {x: 0.29, y: 0.23}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -973,6 +976,9 @@ MonoBehaviour:
   velocidad: 0.5
   radioDeteccion: 1
   distanciaPatrullaje: 1
+  CantidadDanioHaciaPlayer: 1
+  fuerzaRebote: 3
+  tiempoInvencibilidad: 0.5
 --- !u!1 &1159863526
 GameObject:
   m_ObjectHideFlags: 0
@@ -1010,6 +1016,7 @@ MonoBehaviour:
   spriteRenderer: {fileID: 1159863532}
   animator: {fileID: 1159863531}
   colision: {fileID: 0}
+  playerMove: {fileID: 0}
 --- !u!114 &1159863528
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1025,7 +1032,8 @@ MonoBehaviour:
   rb2d: {fileID: 1159863529}
   velocidadX: 2
   velocidadSalto: 5
-  fuerzaRebotea: 5
+  vida: 5
+  fuerzaRebotea: 2.5
   tiempoInvensibilidad: 0.5
 --- !u!50 &1159863529
 Rigidbody2D:
@@ -1255,7 +1263,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6274026309886601096, guid: 9f76e2d204bf3c746975e22f720c7fc1, type: 3}
       propertyPath: fuerzaRebotea
-      value: 5
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 6274026309886601096, guid: 9f76e2d204bf3c746975e22f720c7fc1, type: 3}
       propertyPath: tiempoInvensibilidad

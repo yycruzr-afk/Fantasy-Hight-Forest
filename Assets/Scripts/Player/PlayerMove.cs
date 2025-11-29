@@ -12,17 +12,19 @@ public class PlayerMove : MonoBehaviour
     [SerializeField]
     private float velocidadSalto = 3f;
 
-
+    [SerializeField]
+    private int vida = 5;
 
     private bool danioRecibe = false;
     private bool atacando = false;
+    private bool estaVivo = true;
     public float fuerzaRebotea = 1f;
     public float tiempoInvensibilidad = 1f;
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (danioRecibe || atacando) return;
+        if (danioRecibe || atacando || !estaVivo) return;
 
         if (Input.GetKey(KeyCode.RightArrow))
         {
@@ -45,6 +47,16 @@ public class PlayerMove : MonoBehaviour
         {
             atacar();
         }
+
+
+        if(vida <= 0 && estaVivo)
+        {
+            estaVivo = false;
+            GetComponent<PlayerAnimation>().DispararAnimacionMuerte();
+            rb2d.linearVelocity = Vector2.zero;
+        }
+
+        GetComponent<PlayerAnimation>().ActualizarAnimaciones();
     }
 
     public void atacar()
@@ -60,12 +72,13 @@ public class PlayerMove : MonoBehaviour
     {
         atacando = false;
     }
-    public void RecibeDanio(Vector2 direccion, int cantidadDanio)
+    public void RecibeDanioPlayer(Vector2 direccion, int cantidadDanio)
     {
-        if (!danioRecibe)
+        if (!danioRecibe || estaVivo)
         {
             danioRecibe = true;
             Vector2 rebote = new Vector2(transform.position.x - direccion.x, .5f);
+            vida -= cantidadDanio;
             rb2d.AddForce(rebote.normalized * fuerzaRebotea, ForceMode2D.Impulse);
         }
 
@@ -75,5 +88,10 @@ public class PlayerMove : MonoBehaviour
     public void desactivaDanio()
     {
         danioRecibe = false;
+    }
+
+    public bool RetornarEstadoVida()
+    {
+        return estaVivo;
     }
 }

@@ -16,7 +16,7 @@ public class SnailMove : BaseEnemies
     }
     private void FixedUpdate()
     {
-        if (danioRecibe) return;
+        if (danioRecibe || !player.GetComponent<PlayerMove>().RetornarEstadoVida()) return;
 
         float distancia = Vector2.Distance(transform.position, player.transform.position);
 
@@ -48,7 +48,7 @@ public class SnailMove : BaseEnemies
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            player.GetComponent<PlayerMove>().RecibeDanio(transform.position, 1);
+            player.GetComponent<PlayerMove>().RecibeDanioPlayer(transform.position, CantidadDanioHaciaPlayer);
         }
     }
 
@@ -56,7 +56,7 @@ public class SnailMove : BaseEnemies
     {
         if (collision.CompareTag("Espada"))
         {
-            RecibeDanio(player.transform.position, 1);
+           RecibeDanio(player.transform.position, 1);
         }
     }
 
