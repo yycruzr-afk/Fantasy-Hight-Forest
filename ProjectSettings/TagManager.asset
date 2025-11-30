@@ -42,5 +42,26 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Sky & Atmosphere
+    uniqueID: 2136791353
+    locked: 0
+  - name: Background
+    uniqueID: 3152239367
+    locked: 0
+  - name: Terrain
+    uniqueID: 1475052181
+    locked: 0
+  - name: Ground
+    uniqueID: 4121283869
+    locked: 0
+  - name: Player & Entities
+    uniqueID: 3582001933
+    locked: 0
+  - name: Foreground
+    uniqueID: 3295904725
+    locked: 0
+  - name: HUD & UI
+    uniqueID: 2738822923
+    locked: 0
   m_RenderingLayers:
   - Default

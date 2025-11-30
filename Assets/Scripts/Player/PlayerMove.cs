@@ -49,7 +49,7 @@ public class PlayerMove : MonoBehaviour
         }
 
 
-        if (Input.GetKey(KeyCode.X) && atacando == false)
+        if (Input.GetKey(KeyCode.X) && atacando == false && GetComponentInChildren<CheckGround>().GetEnSuelo())
         {
             atacar();
         }
